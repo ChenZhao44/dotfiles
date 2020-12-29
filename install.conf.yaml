@@ -1,3 +1,22 @@
-- clean: []
-- link: {}
-- shell: []
+- defaults:
+    link:
+      relink: true
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [mkdir -p ~/.oh-my-zsh/custom/, Creating oh-my-zsh custom forlders]
+  - [mkdir -p ~/.oh-my-zsh/custom/plugins, Creating oh-my-zsh custom plugins folders]
+  - [mkdir -p ~/.oh-my-zsh/custom/themes, Creating oh-my-zsh custom themes folders]
+
+- link:
+    ~/.aliases: aliases
+    ~/.vim: vim
+    ~/.vimrc: vimrc 
+    ~/.zshrc: zshrc
+    ~/.bashrc: bashrc
+    ~/.bash_profile: bash_profile
+    ~/.gitconfig: gitconfig
+    ~/.oh-my-zsh/custom/plugins/vscode: oh-my-zsh/custom/plugins/vscode
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: oh-my-zsh/custom/plugins/zsh-autosuggestions
+    ~/.oh-my-zsh/themes/dracula.zsh-theme: oh-my-zsh/custom/themes/dracula/zsh/dracula.zsh-theme

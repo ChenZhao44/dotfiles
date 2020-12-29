@@ -17,3 +17,4 @@
 [submodule "oh-my-zsh/custom/themes/dracula/zsh"]
 	path = oh-my-zsh/custom/themes/dracula/zsh
 	url = https://github.com/dracula/zsh
+	ignore = dirty
