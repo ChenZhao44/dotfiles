@@ -2,3 +2,18 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "oh-my-zsh/custom/plugins/vscode"]
+	path = oh-my-zsh/custom/plugins/vscode
+	url = https://github.com/valentinocossar/vscode
+	ignore = dirty
+[submodule "oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+	ignore = dirty
+[submodule "oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	ignore = dirty
+[submodule "oh-my-zsh/custom/themes/dracula/zsh"]
+	path = oh-my-zsh/custom/themes/dracula/zsh
+	url = https://github.com/dracula/zsh
