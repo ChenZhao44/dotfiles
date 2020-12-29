@@ -13,6 +13,7 @@
     ~/.vim: vim
     ~/.vimrc: vimrc 
     ~/.zshrc: zshrc
+    ~/.condarc: condarc
     ~/.gitconfig: gitconfig
     ~/.oh-my-zsh/custom/plugins/vscode: oh-my-zsh/custom/plugins/vscode
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: oh-my-zsh/custom/plugins/zsh-syntax-highlighting
