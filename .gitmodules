@@ -18,3 +18,19 @@
 	path = oh-my-zsh/custom/themes/dracula/zsh
 	url = https://github.com/dracula/zsh
 	ignore = dirty
+[submodule "vim/pack/vendor/start/ack.vim"]
+	path = vim/pack/vendor/start/ack.vim
+	url = https://github.com/mileszs/ack.vim
+	ignore = dirty
+[submodule "vim/pack/vendor/start/ctrlp.vim"]
+	path = vim/pack/vendor/start/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
+	ignore = dirty
+[submodule "vim/pack/vendor/start/nerdtree"]
+	path = vim/pack/vendor/start/nerdtree
+	url = https://github.com/preservim/nerdtree
+	ignore = dirty
+[submodule "vim/pack/vendor/start/vim-easymotion"]
+	path = vim/pack/vendor/start/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion
+	ignore = dirty
