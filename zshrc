@@ -114,3 +114,8 @@ fi
 if [ -f ~/.zshrc_local_after ]; then
     source ~/.zshrc_local_after
 fi
+
+# Allow aliases 
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
