@@ -7,6 +7,7 @@
   - [mkdir -p ~/.oh-my-zsh/custom/, Creating oh-my-zsh custom forlders]
   - [mkdir -p ~/.oh-my-zsh/custom/plugins, Creating oh-my-zsh custom plugins folders]
   - [mkdir -p ~/.oh-my-zsh/custom/themes, Creating oh-my-zsh custom themes folders]
+  - [mkdir -p ~/.config/nvim, Creating nvim configuration folders]
 
 - link:
     ~/.aliases: aliases
@@ -19,3 +20,6 @@
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: oh-my-zsh/custom/plugins/zsh-autosuggestions
     ~/.oh-my-zsh/themes/dracula.zsh-theme: oh-my-zsh/custom/themes/dracula/zsh/dracula.zsh-theme
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/nvim/coc-settings.json: nvim/coc-settings.json
+    ~/.config/nvim/UltiSnips: nvim/UltiSnips
