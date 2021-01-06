@@ -300,6 +300,10 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" Config: coc-pairs
+let b:coc_pairs_disabled = ['<']
+autocmd FileType tex let b:coc_pairs_disabled = ['<', "`"]
+
 
 " Config: UltiSnips
 "let g:UltiSnipsExpandTrigger = '<nohap>'
