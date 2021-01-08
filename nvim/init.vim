@@ -8,6 +8,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'Yggdroot/indentLine'
 Plug 'crusoexia/vim-monokai'
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'vim-airline/vim-airline'       
 Plug 'vim-airline/vim-airline-themes' "airline 的主题
 Plug 'scrooloose/nerdcommenter'
@@ -28,6 +29,7 @@ let g:latex_to_unicode_file_types_blacklist = '.*'
 
 " Config: Theme
 colo monokai
+" colorscheme dracula
 
 
 " Config: vim-airline
