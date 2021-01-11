@@ -103,6 +103,7 @@ let g:NERDToggleCheckAllLines = 1
 
 
 " Config: vimtex
+" Notes: need to install pynvim and neovim-remote via pip
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
 let g:vimtex_quickfix_mode = 0
