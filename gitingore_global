@@ -1,0 +1,13 @@
+# For macOS #
+.DS_Store
+*/.DS_Store
+
+# For LaTeX #
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex*
+*.synctex.*
