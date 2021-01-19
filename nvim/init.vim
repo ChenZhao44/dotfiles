@@ -13,7 +13,48 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes' "airline 的主题
 Plug 'scrooloose/nerdcommenter'
 Plug 'JuliaEditorSupport/julia-vim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+" Plug 'neovim/nvim-lsp' " collection of common configurations for the Nvim LSP client.
+" Plug 'neovim/nvim-lspconfig'
 call plug#end()
+
+" Config: LanguageClient
+" julia
+let g:default_julia_version = '1.5'
+
+" language server
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+\       using LanguageServer;
+\       using Pkg;
+\       import StaticLint;
+\       import SymbolServer;
+\       env_path = dirname(Pkg.Types.Context().env.project_file);
+\       
+\       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+\       server.runlinter = true;
+\       run(server);
+\   ']
+\ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" " Config: Julia LanguageServer.jl
+" lua << EOF
+"     require'lspconfig'.julials.setup{}
+" EOF
+"
+" autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+"
+" nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> <leader>lh    <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+" nnoremap <silent> <leader>lk    <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> <leader>lr    <cmd>lua vim.lsp.buf.references()<CR>
+"
 
 " Config: vim-julia
 let g:latex_to_unicode_file_types = '$^'
