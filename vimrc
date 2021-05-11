@@ -82,3 +82,14 @@ nnoremap <Down>  :echoe "Use j"<CR>
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+set linebreak
+set breakindent
+set wrap
+
+" use j, k to move up and down in a long line
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" highlight the current line
+set cursorline

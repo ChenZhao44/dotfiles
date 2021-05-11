@@ -8,12 +8,11 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'Yggdroot/indentLine'
 Plug 'crusoexia/vim-monokai'
-Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'vim-airline/vim-airline'       
 Plug 'vim-airline/vim-airline-themes' "airline 的主题
 Plug 'scrooloose/nerdcommenter'
 Plug 'JuliaEditorSupport/julia-vim'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 " Plug 'neovim/nvim-lsp' " collection of common configurations for the Nvim LSP client.
 " Plug 'neovim/nvim-lspconfig'
 call plug#end()
@@ -25,18 +24,18 @@ let g:default_julia_version = '1.5'
 " language server
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       using Pkg;
-\       import StaticLint;
-\       import SymbolServer;
-\       env_path = dirname(Pkg.Types.Context().env.project_file);
-\       
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-\       server.runlinter = true;
-\       run(server);
-\   ']
-\ }
+            \   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+            \       using LanguageServer;
+            \       using Pkg;
+            \       import StaticLint;
+            \       import SymbolServer;
+            \       env_path = dirname(Pkg.Types.Context().env.project_file);
+            \       
+            \       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+            \       server.runlinter = true;
+            \       run(server);
+            \   ']
+            \ }
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
@@ -61,11 +60,12 @@ let g:latex_to_unicode_file_types = '$^'
 let g:latex_to_unicode_file_types_blacklist = '.*'
 
 
-" " Config: indentLine
+" Config: indentLine
 " let g:indent_guides_guide_size = 1  " 指定对齐线的尺寸
 " let g:indent_guides_start_level = 2  " 从第二层开始可视化显示缩进
 " let g:indentLine_conceallevel = 1
 " let g:indentLine_setConceal = 1
+let g:indentLine_fileTypeExclude = ['tex']
 
 
 " Config: Theme
@@ -82,17 +82,17 @@ let g:airline_theme = 'desertink'  " 主题
 let g:airline#extensions#keymap#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
-       \ '0': '0 ',
-       \ '1': '1 ',
-       \ '2': '2 ',
-       \ '3': '3 ',
-       \ '4': '4 ',
-       \ '5': '5 ',
-       \ '6': '6 ',
-       \ '7': '7 ',
-       \ '8': '8 ',
-       \ '9': '9 '
-       \}
+            \ '0': '0 ',
+            \ '1': '1 ',
+            \ '2': '2 ',
+            \ '3': '3 ',
+            \ '4': '4 ',
+            \ '5': '5 ',
+            \ '6': '6 ',
+            \ '7': '7 ',
+            \ '8': '8 ',
+            \ '9': '9 '
+            \}
 " 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -148,45 +148,63 @@ let g:NERDToggleCheckAllLines = 1
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
 let g:vimtex_quickfix_mode = 0
-set conceallevel=1
+au Filetype tex setlocal conceallevel=1
 let g:tex_conceal='abdmg'
 let g:vimtex_toc_config = {
-\ 'name' : 'TOC',
-\ 'layers' : ['content', 'todo', 'include'],
-\ 'split_width' : 25,
-\ 'todo_sorted' : 0,
-\ 'show_help' : 1,
-\ 'show_numbers' : 1,
-\}
+            \ 'name' : 'TOC',
+            \ 'layers' : ['content', 'todo', 'include'],
+            \ 'split_width' : 25,
+            \ 'todo_sorted' : 0,
+            \ 'show_help' : 1,
+            \ 'show_numbers' : 1,
+            \}
 let g:vimtex_view_general_viewer
-\ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+            \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
 
 " This adds a callback hook that updates Skim after compilation
 let g:vimtex_compiler_callback_hooks = ['UpdateSkim']
 
 function! UpdateSkim(status)
-if !a:status | return | endif
+    if !a:status | return | endif
 
-let l:out = b:vimtex.out()
-let l:tex = expand('%:p')
-let l:cmd = [g:vimtex_view_general_viewer, '-r']
+    let l:out = b:vimtex.out()
+    let l:tex = expand('%:p')
+    let l:cmd = [g:vimtex_view_general_viewer, '-r']
 
-if !empty(system('pgrep Skim'))
-call extend(l:cmd, ['-g'])
-endif
+    if !empty(system('pgrep Skim'))
+        call extend(l:cmd, ['-g'])
+    endif
 
-if has('nvim')
-call jobstart(l:cmd + [line('.'), l:out, l:tex])
-elseif has('job')
-call job_start(l:cmd + [line('.'), l:out, l:tex])
-else
-call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
-endif
+    if has('nvim')
+        call jobstart(l:cmd + [line('.'), l:out, l:tex])
+    elseif has('job')
+        call job_start(l:cmd + [line('.'), l:out, l:tex])
+    else
+        call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
+    endif
 endfunction
 
 
 " Config: coc.nvim
+
+let g:coc_global_extensions = [
+    \ 'coc-explorer',
+    \ 'coc-gitignore',
+    \ 'coc-lists',
+    \ 'coc-python',
+    \ 'coc-translator',
+    \ 'coc-yaml',
+    \ 'coc-yank',
+    \ 'coc-ultisnips',
+    \ 'coc-pairs',
+    \ 'coc-vimtex']
+
+" coc-explorer
+nmap tt :CocCommand explorer<CR>
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
+
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
@@ -202,37 +220,37 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
 else
-  set signcolumn=yes
+    set signcolumn=yes
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+    inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -249,13 +267,13 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -269,11 +287,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -299,12 +317,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.

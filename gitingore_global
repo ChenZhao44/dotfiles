@@ -10,4 +10,10 @@
 *.log
 *.out
 *.synctex*
+*/*.synctex*
 *.synctex.*
+*/*.synctex.*
+
+# For VSCode #
+.vscode
+*/.vscode

@@ -120,3 +120,5 @@ fi
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
+
+[ -f "/Users/chenzhao/.ghcup/env" ] && source "/Users/chenzhao/.ghcup/env" # ghcup-env

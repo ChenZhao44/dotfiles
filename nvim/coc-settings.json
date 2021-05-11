@@ -10,5 +10,36 @@
     // Target to show hover information, default is floating window when possible.
     "coc.preferences.hoverTarget": "preview",
     // Auto close preview window on cursor move.,  default: `true`
-    "coc.preferences.previewAutoClose": false
+    "coc.preferences.previewAutoClose": false,
+
+    "translator.toLang": {
+      "type": "string",
+      "description": "Target language type"
+    },
+    "translator.engines": {
+      "type": "array",
+      "default": [
+        "bing",
+        "google",
+        "youdao",
+        "haici"
+      ]
+    },
+    "translator.enableBorder": {
+      "type": "boolean",
+      "default": true
+    },
+    "translator.enableHover": {
+      "type": "boolean",
+      "default": false,
+      "description": "Translate when mouse hover"
+    },
+    "translator.window.maxWidth": {
+      "type": "number",
+      "default": 999
+    },
+    "translator.window.maxHeight": {
+      "type": "number",
+      "default": 999
+    }
 }
